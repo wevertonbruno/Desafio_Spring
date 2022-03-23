@@ -34,3 +34,4 @@ complexidade maior.
 - [ ] R011: Cadastre novos clientes.
 - [ ] R012: Obter uma lista completa de todos os clientes.
 - [ ] R013: Obter uma lista de todos os clientes filtrados por Estado.
+- exemplo
