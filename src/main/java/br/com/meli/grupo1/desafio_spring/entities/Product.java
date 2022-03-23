@@ -1,18 +1,18 @@
-package br.com.meli.grupo1.desafio_spring.entity;
+package br.com.meli.grupo1.desafio_spring.entities;
 
 import java.math.BigDecimal;
 
-public class Produto<Interger> {
+public class Product {
     private long productId;
     private String name;
     private String category;
     private String brand;
     private BigDecimal price;
-    private Interger quantity;
+    private Integer quantity;
     private boolean freeShipping;
     private String prestige;
 
-    public Produto(long productId, String name, String category, String brand, BigDecimal price, Interger quantity,
+    public Product(long productId, String name, String category, String brand, BigDecimal price, Integer quantity,
                    boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
@@ -64,11 +64,11 @@ public class Produto<Interger> {
         this.price = price;
     }
 
-    public Interger getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Interger quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -87,5 +87,6 @@ public class Produto<Interger> {
     public void setPrestige(String prestige) {
         this.prestige = prestige;
     }
+
 
 }
