@@ -1,5 +1,6 @@
 package br.com.meli.grupo1.desafio_spring.controllers;
 
+import br.com.meli.grupo1.desafio_spring.DTO.CreateRequestDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.ProductCreateResponseDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.repositories.RepoCreateProduct;
@@ -17,11 +18,11 @@ import java.util.List;
 public class ControllerProductCreate {
 
     @Autowired
-    private RepoCreateProduct repoCreateProduct;
+    private ServiceProductCreate serviceProductCreate;
 
     @PostMapping("/insert-articles-request")
-    public ProductCreateResponseDTO create (@RequestBody List<Product> products){
-        return repoCreateProduct.create(products);
+    public ProductCreateResponseDTO create (@RequestBody CreateRequestDTO articles){
+        return serviceProductCreate.create(articles);
     }
 
 }
