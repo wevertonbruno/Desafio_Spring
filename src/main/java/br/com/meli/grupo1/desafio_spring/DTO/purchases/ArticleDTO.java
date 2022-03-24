@@ -1,19 +1,18 @@
-package br.com.meli.grupo1.desafio_spring.entities;
+package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
 import java.math.BigDecimal;
 
-public class Product {
+public class ArticleDTO {
     private Integer productId;
     private String name;
     private String category;
     private String brand;
     private BigDecimal price;
     private Integer quantity;
-    private boolean freeShipping;
+    private Boolean freeShipping;
     private String prestige;
 
-    public Product(Integer productId, String name, String category, String brand, BigDecimal price, Integer quantity,
-                   boolean freeShipping, String prestige) {
+    public ArticleDTO(Integer productId, String name, String category, String brand, BigDecimal price, Integer quantity, Boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
         this.category = category;
@@ -72,11 +71,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public boolean getFreeShipping() {
+    public Boolean getFreeShipping() {
         return freeShipping;
     }
 
-    public void setFreeShipping(boolean freeShipping) {
+    public void setFreeShipping(Boolean freeShipping) {
         this.freeShipping = freeShipping;
     }
 
@@ -88,5 +87,17 @@ public class Product {
         this.prestige = prestige;
     }
 
-
+    @Override
+    public String toString() {
+        return "ArticleDTO{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", freeShipping=" + freeShipping +
+                ", prestige='" + prestige + '\'' +
+                '}';
+    }
 }
