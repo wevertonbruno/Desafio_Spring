@@ -10,7 +10,7 @@ public class Product implements Serializable {
     private String brand;
     private BigDecimal price;
     private Integer quantity;
-    private boolean freeShipping;
+    private Boolean freeShipping;
     private String prestige;
 
     public Product(){}
@@ -79,7 +79,7 @@ public class Product implements Serializable {
         return freeShipping;
     }
 
-    public void setFreeShipping(boolean freeShipping) {
+    public void setFreeShipping(Boolean freeShipping) {
         this.freeShipping = freeShipping;
     }
 
@@ -90,6 +90,4 @@ public class Product implements Serializable {
     public void setPrestige(String prestige) {
         this.prestige = prestige;
     }
-
-
 }
