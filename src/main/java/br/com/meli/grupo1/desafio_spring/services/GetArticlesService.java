@@ -18,10 +18,11 @@ public class GetArticlesService {
     private GetAllArticlesRepository products;
 //    public Product(Long productId, String name, String category, String brand, Double price, Integer quantity,
 //                   boolean freeShipping, String prestige) {
-    public static List<Product> productsList = new ArrayList<>();
+
+    private static List<Product> productsListRepo = new ArrayList<>();
 
     static {
-        productsList.addAll(Arrays.asList(
+        productsListRepo.addAll(Arrays.asList(
                 new Product(1L, "Serra de Bancada","Ferramentas", "FORTGPRO", BigDecimal.valueOf(1.800), 5, true, "****"),
                 new Product(2L, "Furadeira","Ferramentas", "Black & Decker", BigDecimal.valueOf(500), 7, true, "****"),
                 new Product(2L, "Soldadora","Ferramentas", "Black & Decker", BigDecimal.valueOf(350.0), 7, true, "***"),
@@ -33,10 +34,12 @@ public class GetArticlesService {
 
     public ArticlesDTO findArticles (String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
 //        List<Product> productsList = products.getAll();
+        List<Product>productsList = new ArrayList<>();
+        productsList = productsListRepo;
         if (category != null && productsList != null)
             productsList = productsList
                     .stream()
-                    .filter(article -> article.getCategory().equals(category))
+                    .filter(article -> article.getCategory().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
         if (freeShipping != null && productsList != null)
             productsList = productsList
@@ -46,12 +49,12 @@ public class GetArticlesService {
         if (productName != null && productsList != null)
             productsList = productsList
                     .stream()
-                    .filter(article -> article.getBrand().equals(productName))
+                    .filter(article -> article.getBrand().equalsIgnoreCase(productName))
                     .collect(Collectors.toList());
         if (brandName != null && productsList != null)
             productsList = productsList
                     .stream()
-                    .filter(article -> article.getBrand().equals(brandName))
+                    .filter(article -> article.getBrand().equalsIgnoreCase(brandName))
                     .collect(Collectors.toList());
         if (typeOrder != null && productsList != null)
             switch (typeOrder){
