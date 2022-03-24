@@ -7,6 +7,8 @@ import br.com.meli.grupo1.desafio_spring.repositories.RepoCreateProduct;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ServiceProductCreate {
     RepoCreateProduct repoCreateProduct;
@@ -16,8 +18,8 @@ public class ServiceProductCreate {
     }
 
     public ProductCreateResponseDTO create(CreateRequestDTO products){
-    ProductCreateResponseDTO responseDTO = repoCreateProduct.create(products.getArticles());
-        return responseDTO;
+        List<Product> createdProducts = repoCreateProduct.create(products.getArticles());
+        return ProductCreateResponseDTO.fromProducts(createdProducts);
     }
 
 }
