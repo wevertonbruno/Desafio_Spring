@@ -58,6 +58,10 @@ public class StandardException {
         return new StandardException(HttpStatus.BAD_REQUEST.value(), msg, Instant.now(), path);
     }
 
+    public  static StandardException internalError(String msg, String path){
+        return new StandardException(HttpStatus.SERVICE_UNAVAILABLE.value(), msg, Instant.now(), path);
+    }
+
     @Override
     public String toString() {
         return "StandardException{" +

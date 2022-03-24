@@ -4,6 +4,7 @@ import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
+import br.com.meli.grupo1.desafio_spring.exceptions.FailToSaveInStorage;
 import br.com.meli.grupo1.desafio_spring.repositories.GetAllArticlesRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.RepoCreateProduct;
@@ -17,10 +18,12 @@ import java.util.stream.Collectors;
 
 @Repository
 public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllArticlesRepository {
-    List<Product> dados = new ArrayList<>();
+    List<Product> dados;
+    List<Order> orders;
 
     public JsonProductRepository() throws IOException {
         dados = JsonUtil.readAsList("file:src/main/resources/data/products.json", Product[].class);
+        orders = JsonUtil.readAsList("file:src/main/resources/data/orders.json", Order[].class);
     }
 
     @Override
@@ -39,21 +42,36 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
         return true;
     }
 
+    @Override
+    public List<Product> getAllProductsIn(List<Long> idList) {
+        return idList.stream().map(id -> findById(id)).collect(Collectors.toList());
+    }
+
     private Product findById(Long id){
         return dados.stream().filter(p -> p.getProductId().equals(id)).findFirst().get();
     }
 
+    private Integer gerenatePurchaseId(){
+            return orders.size() + 1;
+    }
+
     @Override
     public Order createPurchases(List<PurchaseDTO> purchasesDTO) {
+        /* Mapeando DTO para lista de purchases TODO mover esse map para a camada de servico */
         List<Purchase> purchases = purchasesDTO.stream().map(p -> new Purchase(p.getQuantity(), findById(p.getProductId()))).collect(Collectors.toList());
 
-        Order order = new Order(530, purchases);
+        /* Gerando ID da compra */
+        Integer generatedId = gerenatePurchaseId();
 
+        /* Criando a compra*/
+        Order order = new Order(generatedId, purchases);
+
+        /* Salvando a compra em um arquivo JSON */
         try {
             JsonUtil.saveAsFile("file:src/main/resources/data/orders.json", order);
             return order;
         }catch (IOException e){
-            return null;
+            throw new FailToSaveInStorage("Nao foi possivel salvar os dados solicitados");
         }
     }
 
