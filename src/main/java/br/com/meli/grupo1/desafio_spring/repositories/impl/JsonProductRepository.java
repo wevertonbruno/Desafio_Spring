@@ -18,6 +18,10 @@ import java.util.stream.Collectors;
 public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct {
     List<Product> dados = new ArrayList<>();
 
+    public JsonProductRepository() throws IOException {
+        dados = JsonUtil.readAsList("file:src/main/resources/data/products.json", Product[].class);
+    }
+
     @Override
     public boolean existProduct(Integer id) {
         return dados.stream().anyMatch(p -> p.getProductId().equals(id));
@@ -45,7 +49,7 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
         Order order = new Order(530, purchases);
 
         try {
-            JsonUtil.saveAsFile("file:src/main/java/resources/data/orders.json", order);
+            JsonUtil.saveAsFile("file:src/main/resources/data/orders.json", order);
             return order;
         }catch (IOException e){
             return null;
@@ -55,7 +59,8 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     @Override
     public List<Product> create(List<Product> products) {
         try {
-            JsonUtil.saveAsFile("file:src/main/java/resources/data/products.json", products);
+            JsonUtil.saveAsFile("file:src/main/resources/data/products.json", products);
+            dados = products;
             return products;
         }catch (IOException e){
             return null;

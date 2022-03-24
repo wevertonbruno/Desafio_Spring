@@ -12,6 +12,9 @@ public class ArticleDTO {
     private Boolean freeShipping;
     private String prestige;
 
+    public ArticleDTO() {
+    }
+
     public ArticleDTO(Integer productId, String name, String category, String brand, BigDecimal price, Integer quantity, Boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;

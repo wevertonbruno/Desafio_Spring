@@ -1,8 +1,9 @@
 package br.com.meli.grupo1.desafio_spring.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Product {
+public class Product implements Serializable {
     private Integer productId;
     private String name;
     private String category;
@@ -12,13 +13,15 @@ public class Product {
     private boolean freeShipping;
     private String prestige;
 
-    public Product(Integer productId, String name, String category, String brand, BigDecimal price, Integer quantity,
+    public Product(){}
+
+    public Product(Integer productId, String name, String category, String brand, Double price, Integer quantity,
                    boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
         this.category = category;
         this.brand = brand;
-        this.price = price;
+        this.price = BigDecimal.valueOf(price);
         this.quantity = quantity;
         this.freeShipping = freeShipping;
         this.prestige = prestige;

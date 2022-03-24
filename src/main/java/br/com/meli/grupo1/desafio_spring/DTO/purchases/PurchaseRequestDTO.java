@@ -8,6 +8,8 @@ public class PurchaseRequestDTO implements Serializable {
 
     private List<PurchaseDTO> articlesPurchaseRequest = new ArrayList<>();
 
+    public PurchaseRequestDTO(){}
+
     public PurchaseRequestDTO(List<PurchaseDTO> articlesPurchaseRequest){
         this.articlesPurchaseRequest = articlesPurchaseRequest;
     }

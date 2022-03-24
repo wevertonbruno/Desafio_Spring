@@ -9,6 +9,9 @@ public class OrderDTO {
     private BigDecimal total;
     private List<ArticleDTO> articles = new ArrayList<>();
 
+    public OrderDTO() {
+    }
+
     public OrderDTO(Integer id, List<ArticleDTO> articles) {
         this.id = id;
         this.articles = articles;

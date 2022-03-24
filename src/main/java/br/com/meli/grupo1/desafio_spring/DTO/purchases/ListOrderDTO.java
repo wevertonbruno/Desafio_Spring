@@ -5,6 +5,9 @@ import java.io.Serializable;
 public class ListOrderDTO implements Serializable {
     private OrderDTO ticket;
 
+    public ListOrderDTO() {
+    }
+
     public ListOrderDTO(OrderDTO ticket) {
         this.ticket = ticket;
     }

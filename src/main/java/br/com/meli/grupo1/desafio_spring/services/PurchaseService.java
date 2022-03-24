@@ -37,9 +37,9 @@ public class PurchaseService {
         List<Integer> productsIdList = request.getArticlesPurchaseRequest().stream().map(p -> p.getProductId()).collect(Collectors.toList());
 
         //Validar se todos os produtos existem
-        boolean verifyProduct = purchaseRepository.allProductsExists(productsIdList);
+        boolean allProductsExists = purchaseRepository.allProductsExists(productsIdList);
 
-        if (verifyProduct) {
+        if (!allProductsExists) {
             throw new UnregisteredProductException("Produto solicitado nao cadastrado ");
         }
 

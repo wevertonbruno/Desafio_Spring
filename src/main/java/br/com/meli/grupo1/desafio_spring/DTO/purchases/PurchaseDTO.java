@@ -6,6 +6,16 @@ public class PurchaseDTO {
     private String brand;
     private Integer quantity;
 
+    public PurchaseDTO() {
+    }
+
+    public PurchaseDTO(Integer productId, String name, String brand, Integer quantity) {
+        this.productId = productId;
+        this.name = name;
+        this.brand = brand;
+        this.quantity = quantity;
+    }
+
     public Integer getProductId() {
         return productId;
     }
