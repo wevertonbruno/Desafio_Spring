@@ -1,6 +1,6 @@
 package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
-public class Purchase {
+public class PurchaseDTO {
     private Integer productId;
     private String name;
     private String brand;

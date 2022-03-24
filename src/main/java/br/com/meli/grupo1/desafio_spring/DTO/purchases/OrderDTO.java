@@ -9,10 +9,9 @@ public class OrderDTO {
     private BigDecimal total;
     private List<ArticleDTO> articles = new ArrayList<>();
 
-    public OrderDTO(Integer id, List<ArticleDTO> articles, BigDecimal total) {
+    public OrderDTO(Integer id, List<ArticleDTO> articles) {
         this.id = id;
         this.articles = articles;
-        this.total = total;
     }
 
     public Integer getId() {
@@ -32,6 +31,12 @@ public class OrderDTO {
     }
 
     public BigDecimal getTotal() {
+        BigDecimal total = BigDecimal.ZERO;
+
+        for(ArticleDTO article: articles){
+            total = total.add(article.getSubTotal());
+        }
+
         return total;
     }
 
@@ -43,7 +48,7 @@ public class OrderDTO {
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-                ", total=" + total +
+                ", total=" + getTotal() +
                 ", articles=" + articles +
                 '}';
     }

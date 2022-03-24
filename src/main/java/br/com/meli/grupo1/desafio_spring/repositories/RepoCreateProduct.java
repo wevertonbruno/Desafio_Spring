@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface RepoCreateProduct {
-    ProductCreateResponseDTO create (List<Product> products);
+    List<Product> create (List<Product> products);
 
 }

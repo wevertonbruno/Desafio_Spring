@@ -87,6 +87,10 @@ public class ArticleDTO {
         this.prestige = prestige;
     }
 
+    public BigDecimal getSubTotal(){
+        return price.multiply(BigDecimal.valueOf(quantity));
+    }
+
     @Override
     public String toString() {
         return "ArticleDTO{" +

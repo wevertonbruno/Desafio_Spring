@@ -6,17 +6,17 @@ import java.util.List;
 
 public class PurchaseRequestDTO implements Serializable {
 
-    private List<Purchase> articlesPurchaseRequest = new ArrayList<>();
+    private List<PurchaseDTO> articlesPurchaseRequest = new ArrayList<>();
 
-    public PurchaseRequestDTO(List<Purchase> articlesPurchaseRequest){
+    public PurchaseRequestDTO(List<PurchaseDTO> articlesPurchaseRequest){
         this.articlesPurchaseRequest = articlesPurchaseRequest;
     }
 
-    public List<Purchase> getArticlesPurchaseRequest() {
+    public List<PurchaseDTO> getArticlesPurchaseRequest() {
         return articlesPurchaseRequest;
     }
 
-    public void setArticlesPurchaseRequest(List<Purchase> articlesPurchaseRequest) {
+    public void setArticlesPurchaseRequest(List<PurchaseDTO> articlesPurchaseRequest) {
         this.articlesPurchaseRequest = articlesPurchaseRequest;
     }
 
