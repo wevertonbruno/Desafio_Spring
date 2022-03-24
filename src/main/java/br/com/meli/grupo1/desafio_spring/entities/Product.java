@@ -75,7 +75,7 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public boolean getFreeShipping() {
+    public Boolean getFreeShipping() {
         return freeShipping;
     }
 

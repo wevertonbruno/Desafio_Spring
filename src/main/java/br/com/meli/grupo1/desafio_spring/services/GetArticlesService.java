@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class GetArticlesService {
     @Autowired
-    private GetAllArticlesRepository articles;
+    private GetAllArticlesRepository products;
 
     public ArticlesDTO findArticles (String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
-        List<Product> articlesList = articles.getAll();
+        List<Product> articlesList = products.getAll();
         if (category != null && articlesList != null)
             articlesList = articlesList
                     .stream()
@@ -25,7 +25,7 @@ public class GetArticlesService {
         if (freeShipping != null && articlesList != null)
             articlesList = articlesList
                     .stream()
-                    .filter(article -> article.isFreeShipping() && freeShipping)
+                    .filter(article -> article.getFreeShipping() && freeShipping)
                     .collect(Collectors.toList());
         if (productName != null && articlesList != null)
             articlesList = articlesList
@@ -64,10 +64,13 @@ public class GetArticlesService {
                             .collect(Collectors.toList());
                     break;
             }
-        ArticlesDTO articlesFinded = new ArticlesDTO(articlesList
-                                         .stream()
-                                         .map(article -> new ArticleDTO(article.getProductId(), article.getName(), article.getQuantity()))
-                                         .collect(Collectors.toList()));
-        return articlesFinded;
+        try {
+            return new ArticlesDTO(articlesList
+                    .stream()
+                    .map(article -> new ArticleDTO(article.getProductId(), article.getName(), article.getQuantity()))
+                    .collect(Collectors.toList()));
+        } catch (NullPointerException e) {
+            //tratar desta exception
+        }
     }
 }
