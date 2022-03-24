@@ -25,7 +25,7 @@ public class GetArticlesService {
         if (freeShipping != null && articlesList != null)
             articlesList = articlesList
                     .stream()
-                    .filter(article -> article.isFreeShipping() && freeShipping)
+                    .filter(article -> article.getFreeShipping() && freeShipping)
                     .collect(Collectors.toList());
         if (productName != null && articlesList != null)
             articlesList = articlesList
