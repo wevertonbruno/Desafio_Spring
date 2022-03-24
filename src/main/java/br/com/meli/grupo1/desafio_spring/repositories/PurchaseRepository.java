@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface PurchaseRepository {
     boolean existProduct(Long id);
     boolean allProductsExists(List<Long> ids);
