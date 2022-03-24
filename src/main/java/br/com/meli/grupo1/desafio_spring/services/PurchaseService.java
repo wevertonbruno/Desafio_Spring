@@ -29,24 +29,25 @@ public class PurchaseService {
 
     public ListOrderDTO purchaseOrder(PurchaseRequestDTO request){
 
-        //Verifica se a lista contem pelo menos 1 produto
+        /* Verifica se a lista contem pelo menos 1 produto */
         if(request.getArticlesPurchaseRequest().size() == 0){
-            throw new EmptyPurchaseException("Compra sem produtos"); //TODO criar exception personalizada
+            throw new EmptyPurchaseException("Nao é possível realizar compras sem produtos");
         }
 
-        //Gera lista de ids de produtos
+        /* Gera lista de ids de produtos */
         List<Integer> productsIdList = request.getArticlesPurchaseRequest().stream().map(p -> p.getProductId()).collect(Collectors.toList());
 
-        //Validar se todos os produtos existem
+        /* Validar se todos os produtos existem */
         boolean allProductsExists = purchaseRepository.allProductsExists(productsIdList);
 
         if (!allProductsExists) {
             throw new UnregisteredProductException("Produto solicitado nao cadastrado ");
         }
 
-        // Busca todos os produtos pela lista de IDs
+        /* Gera uma Order com base nas purchases */
         Order order = purchaseRepository.createPurchases(request.getArticlesPurchaseRequest());
 
+        /* Gera retorno para o usuario com DTO */
         List<ArticleDTO> articleDTO = order.getPurchases().stream().map(purchase -> new ArticleDTO(
                 purchase.getProduct().getProductId(),
                 purchase.getProduct().getName(),
@@ -58,7 +59,6 @@ public class PurchaseService {
                 purchase.getProduct().getPrestige()
         )).collect(Collectors.toList());
 
-        //Nao soube o que colocar nesse ID
         OrderDTO orderDTO = new OrderDTO(order.getId(), articleDTO );
 
         return new ListOrderDTO(orderDTO);

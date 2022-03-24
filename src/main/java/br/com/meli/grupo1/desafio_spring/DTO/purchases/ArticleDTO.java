@@ -1,5 +1,7 @@
 package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 public class ArticleDTO {
