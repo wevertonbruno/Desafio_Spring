@@ -10,12 +10,7 @@ import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ArticlesDTO {
     List<ArticleDTO> articlesDTO;
-    public ArticlesDTO(List<Article> articles) {
-        this.articlesDTO = articles
-                .stream()
-                .map(article -> new ArticleDTO(article.getProductId(), article.getName(), article.getQuantity())).collect(Collectors.toList());
-    }
-
 }

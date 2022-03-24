@@ -1,20 +1,17 @@
 package br.com.meli.grupo1.desafio_spring.controllers;
 
 import br.com.meli.grupo1.desafio_spring.DTO.ArticlesDTO;
-import br.com.meli.grupo1.desafio_spring.repositories.GetAllArticles;
-import br.com.meli.grupo1.desafio_spring.services.GetArticleService;
+import br.com.meli.grupo1.desafio_spring.services.GetArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 public class ControllerGetArticles {
     @Autowired
-    private GetArticleService service;
+    private GetArticlesService service;
 
     @GetMapping(path = "/api/v1/articles")
     ResponseEntity<ArticlesDTO> getArticles(

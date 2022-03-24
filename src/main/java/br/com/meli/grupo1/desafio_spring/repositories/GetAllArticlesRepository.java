@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface GetAllArticles {
+public interface GetAllArticlesRepository {
     public List<Article> getAll();
 }

@@ -1,8 +1,9 @@
 package br.com.meli.grupo1.desafio_spring.services;
 
+import br.com.meli.grupo1.desafio_spring.DTO.ArticleDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.ArticlesDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Article;
-import br.com.meli.grupo1.desafio_spring.repositories.GetAllArticles;
+import br.com.meli.grupo1.desafio_spring.repositories.GetAllArticlesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class GetArticleService {
+public class GetArticlesService {
     @Autowired
-    private GetAllArticles articles;
+    private GetAllArticlesRepository articles;
 
     public ArticlesDTO findArticles (String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
         List<Article> articlesList = articles.getAll();
@@ -63,10 +64,10 @@ public class GetArticleService {
                             .collect(Collectors.toList());
                     break;
             }
-
-
-
-
-        return new ArticlesDTO(articlesList);
+        ArticlesDTO articlesFinded = new ArticlesDTO(articlesList
+                                         .stream()
+                                         .map(article -> new ArticleDTO(article.getProductId(), article.getName(), article.getQuantity()))
+                                         .collect(Collectors.toList()));
+        return articlesFinded;
     }
 }
