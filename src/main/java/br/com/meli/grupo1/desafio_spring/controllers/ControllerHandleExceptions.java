@@ -1,5 +1,6 @@
 package br.com.meli.grupo1.desafio_spring.controllers;
 
+import br.com.meli.grupo1.desafio_spring.exceptions.EmptyPurchaseException;
 import br.com.meli.grupo1.desafio_spring.exceptions.UnregisteredProductException;
 import br.com.meli.grupo1.desafio_spring.exceptions.StandardException;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 public class ControllerHandleExceptions {
     @ExceptionHandler(UnregisteredProductException.class)
     public ResponseEntity<StandardException> unregistred(UnregisteredProductException e, HttpServletRequest request){
+        StandardException response = StandardException.badRequest(e.getMessage(), request.getRequestURI());
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(EmptyPurchaseException.class)
+    public ResponseEntity<StandardException> emptyPurchaseRequest(EmptyPurchaseException e, HttpServletRequest request){
         StandardException response = StandardException.badRequest(e.getMessage(), request.getRequestURI());
         return ResponseEntity.badRequest().body(response);
     }

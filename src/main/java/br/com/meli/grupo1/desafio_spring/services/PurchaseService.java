@@ -7,6 +7,7 @@ import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseRequestDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
+import br.com.meli.grupo1.desafio_spring.exceptions.EmptyPurchaseException;
 import br.com.meli.grupo1.desafio_spring.exceptions.UnregisteredProductException;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class PurchaseService {
 
         //Verifica se a lista contem pelo menos 1 produto
         if(request.getArticlesPurchaseRequest().size() == 0){
-            throw new RuntimeException("A compra precisa ter pelo menos 1 produto"); //TODO criar exception personalizada
+            throw new EmptyPurchaseException("Compra sem produtos"); //TODO criar exception personalizada
         }
 
         //Gera lista de ids de produtos
@@ -58,7 +59,7 @@ public class PurchaseService {
         )).collect(Collectors.toList());
 
         //Nao soube o que colocar nesse ID
-        OrderDTO orderDTO = new OrderDTO( 1, articleDTO );
+        OrderDTO orderDTO = new OrderDTO(order.getId(), articleDTO );
 
         return new ListOrderDTO(orderDTO);
     }
