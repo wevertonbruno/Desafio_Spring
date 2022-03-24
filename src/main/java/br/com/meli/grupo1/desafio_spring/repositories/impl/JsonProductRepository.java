@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Repository
 public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllArticlesRepository {
     List<Product> dados;
-    List<Order> orders;
+    List<Order> orders = new ArrayList<>();
 
     public JsonProductRepository() throws IOException {
         dados = JsonUtil.readAsList("file:src/main/resources/data/products.json", Product[].class);
@@ -65,10 +65,12 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
 
         /* Criando a compra*/
         Order order = new Order(generatedId, purchases);
+        System.out.println(orders);
+        orders.add(order);
 
         /* Salvando a compra em um arquivo JSON */
         try {
-            JsonUtil.saveAsFile("file:src/main/resources/data/orders.json", order);
+            JsonUtil.saveAsFile("file:src/main/resources/data/orders.json", orders);
             return order;
         }catch (IOException e){
             throw new FailToSaveInStorage("Nao foi possivel salvar os dados solicitados");
