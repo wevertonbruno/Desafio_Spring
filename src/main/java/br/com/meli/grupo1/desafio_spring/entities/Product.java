@@ -15,13 +15,13 @@ public class Product implements Serializable {
 
     public Product(){}
 
-    public Product(Long productId, String name, String category, String brand, Double price, Integer quantity,
-                   boolean freeShipping, String prestige) {
+    public Product(Long productId, String name, String category, String brand, BigDecimal price, Integer quantity,
+                   Boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
         this.category = category;
         this.brand = brand;
-        this.price = BigDecimal.valueOf(price);
+        this.price = price;
         this.quantity = quantity;
         this.freeShipping = freeShipping;
         this.prestige = prestige;
