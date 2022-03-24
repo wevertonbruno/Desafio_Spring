@@ -4,6 +4,7 @@ import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
+import br.com.meli.grupo1.desafio_spring.repositories.GetAllArticlesRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.RepoCreateProduct;
 import br.com.meli.grupo1.desafio_spring.utils.JsonUtil;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct {
+public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllArticlesRepository {
     List<Product> dados = new ArrayList<>();
 
     public JsonProductRepository() throws IOException {
@@ -65,5 +66,10 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
         }catch (IOException e){
             return null;
         }
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return null;
     }
 }
