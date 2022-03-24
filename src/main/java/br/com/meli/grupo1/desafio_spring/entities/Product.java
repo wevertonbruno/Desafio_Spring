@@ -3,17 +3,17 @@ package br.com.meli.grupo1.desafio_spring.entities;
 import java.math.BigDecimal;
 
 public class Product {
-    private long productId;
+    private Long productId;
     private String name;
     private String category;
     private String brand;
     private BigDecimal price;
     private Integer quantity;
-    private boolean freeShipping;
+    private Boolean freeShipping;
     private String prestige;
 
-    public Product(long productId, String name, String category, String brand, BigDecimal price, Integer quantity,
-                   boolean freeShipping, String prestige) {
+    public Product(Long productId, String name, String category, String brand, BigDecimal price, Integer quantity,
+                   Boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
         this.category = category;
@@ -28,7 +28,7 @@ public class Product {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -76,7 +76,7 @@ public class Product {
         return freeShipping;
     }
 
-    public void setFreeShipping(boolean freeShipping) {
+    public void setFreeShipping(Boolean freeShipping) {
         this.freeShipping = freeShipping;
     }
 
