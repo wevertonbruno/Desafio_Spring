@@ -1,9 +1,8 @@
-package br.com.meli.grupo1.desafio_spring.entities;
+package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Product implements Serializable {
+public class PurchaseArticleDTO {
     private Long productId;
     private String name;
     private String category;
@@ -13,15 +12,15 @@ public class Product implements Serializable {
     private Boolean freeShipping;
     private String prestige;
 
-    public Product(){}
+    public PurchaseArticleDTO() {
+    }
 
-    public Product(Long productId, String name, String category, String brand, Double price, Integer quantity,
-                   boolean freeShipping, String prestige) {
+    public PurchaseArticleDTO(Long productId, String name, String category, String brand, BigDecimal price, Integer quantity, Boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
         this.category = category;
         this.brand = brand;
-        this.price = BigDecimal.valueOf(price);
+        this.price = price;
         this.quantity = quantity;
         this.freeShipping = freeShipping;
         this.prestige = prestige;
@@ -75,7 +74,7 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public boolean getFreeShipping() {
+    public Boolean getFreeShipping() {
         return freeShipping;
     }
 
@@ -89,5 +88,23 @@ public class Product implements Serializable {
 
     public void setPrestige(String prestige) {
         this.prestige = prestige;
+    }
+
+    public BigDecimal getSubTotal(){
+        return price.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleDTO{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", freeShipping=" + freeShipping +
+                ", prestige='" + prestige + '\'' +
+                '}';
     }
 }
