@@ -7,12 +7,12 @@ import java.util.List;
 public class OrderDTO {
     private Integer id;
     private BigDecimal total;
-    private List<ArticleDTO> articles = new ArrayList<>();
+    private List<PurchaseArticleDTO> articles = new ArrayList<>();
 
     public OrderDTO() {
     }
 
-    public OrderDTO(Integer id, List<ArticleDTO> articles) {
+    public OrderDTO(Integer id, List<PurchaseArticleDTO> articles) {
         this.id = id;
         this.articles = articles;
     }
@@ -25,18 +25,18 @@ public class OrderDTO {
         this.id = id;
     }
 
-    public List<ArticleDTO> getArticles() {
+    public List<PurchaseArticleDTO> getArticles() {
         return articles;
     }
 
-    public void setArticles(List<ArticleDTO> articles) {
+    public void setArticles(List<PurchaseArticleDTO> articles) {
         this.articles = articles;
     }
 
     public BigDecimal getTotal() {
         BigDecimal total = BigDecimal.ZERO;
 
-        for(ArticleDTO article: articles){
+        for(PurchaseArticleDTO article: articles){
             total = total.add(article.getSubTotal());
         }
 

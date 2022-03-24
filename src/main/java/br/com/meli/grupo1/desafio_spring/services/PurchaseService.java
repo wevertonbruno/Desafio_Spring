@@ -1,21 +1,16 @@
 package br.com.meli.grupo1.desafio_spring.services;
 
-import br.com.meli.grupo1.desafio_spring.DTO.purchases.ArticleDTO;
+import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseArticleDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.purchases.ListOrderDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.purchases.OrderDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseRequestDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
-import br.com.meli.grupo1.desafio_spring.entities.Product;
-import br.com.meli.grupo1.desafio_spring.entities.Purchase;
 import br.com.meli.grupo1.desafio_spring.exceptions.EmptyPurchaseException;
 import br.com.meli.grupo1.desafio_spring.exceptions.UnregisteredProductException;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +30,7 @@ public class PurchaseService {
         }
 
         /* Gera lista de ids de produtos */
-        List<Integer> productsIdList = request.getArticlesPurchaseRequest().stream().map(p -> p.getProductId()).collect(Collectors.toList());
+        List<Long> productsIdList = request.getArticlesPurchaseRequest().stream().map(p -> p.getProductId()).collect(Collectors.toList());
 
         /* Validar se todos os produtos existem */
         boolean allProductsExists = purchaseRepository.allProductsExists(productsIdList);
@@ -48,7 +43,7 @@ public class PurchaseService {
         Order order = purchaseRepository.createPurchases(request.getArticlesPurchaseRequest());
 
         /* Gera retorno para o usuario com DTO */
-        List<ArticleDTO> articleDTO = order.getPurchases().stream().map(purchase -> new ArticleDTO(
+        List<PurchaseArticleDTO> articleDTO = order.getPurchases().stream().map(purchase -> new PurchaseArticleDTO(
                 purchase.getProduct().getProductId(),
                 purchase.getProduct().getName(),
                 purchase.getProduct().getCategory(),

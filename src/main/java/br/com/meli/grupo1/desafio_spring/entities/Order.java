@@ -1,6 +1,5 @@
 package br.com.meli.grupo1.desafio_spring.entities;
 
-import br.com.meli.grupo1.desafio_spring.DTO.purchases.ArticleDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

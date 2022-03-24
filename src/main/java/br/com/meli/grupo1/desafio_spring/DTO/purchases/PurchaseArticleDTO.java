@@ -1,11 +1,9 @@
 package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.math.BigDecimal;
 
-public class ArticleDTO {
-    private Integer productId;
+public class PurchaseArticleDTO {
+    private Long productId;
     private String name;
     private String category;
     private String brand;
@@ -14,10 +12,10 @@ public class ArticleDTO {
     private Boolean freeShipping;
     private String prestige;
 
-    public ArticleDTO() {
+    public PurchaseArticleDTO() {
     }
 
-    public ArticleDTO(Integer productId, String name, String category, String brand, BigDecimal price, Integer quantity, Boolean freeShipping, String prestige) {
+    public PurchaseArticleDTO(Long productId, String name, String category, String brand, BigDecimal price, Integer quantity, Boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
         this.category = category;
@@ -28,11 +26,11 @@ public class ArticleDTO {
         this.prestige = prestige;
     }
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 

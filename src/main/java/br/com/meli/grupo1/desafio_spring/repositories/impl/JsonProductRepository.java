@@ -23,13 +23,13 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     }
 
     @Override
-    public boolean existProduct(Integer id) {
+    public boolean existProduct(Long id) {
         return dados.stream().anyMatch(p -> p.getProductId().equals(id));
     }
 
     @Override
-    public boolean allProductsExists(List<Integer> ids) {
-        for(Integer id: ids){
+    public boolean allProductsExists(List<Long> ids) {
+        for(Long id: ids){
             if(!existProduct(id)){
                 return false;
             }
@@ -38,7 +38,7 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
         return true;
     }
 
-    private Product findById(Integer id){
+    private Product findById(Long id){
         return dados.stream().filter(p -> p.getProductId().equals(id)).findFirst().get();
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PurchaseRepository {
-    boolean existProduct(Integer id);
-    boolean allProductsExists(List<Integer> ids);
+    boolean existProduct(Long id);
+    boolean allProductsExists(List<Long> ids);
     Order createPurchases(List<PurchaseDTO> purchases);
 }

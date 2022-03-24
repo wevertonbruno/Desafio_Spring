@@ -1,7 +1,7 @@
 package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
 public class PurchaseDTO {
-    private Integer productId;
+    private Long productId;
     private String name;
     private String brand;
     private Integer quantity;
@@ -9,18 +9,18 @@ public class PurchaseDTO {
     public PurchaseDTO() {
     }
 
-    public PurchaseDTO(Integer productId, String name, String brand, Integer quantity) {
+    public PurchaseDTO(Long productId, String name, String brand, Integer quantity) {
         this.productId = productId;
         this.name = name;
         this.brand = brand;
         this.quantity = quantity;
     }
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
