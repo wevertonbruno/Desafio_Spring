@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ControllerHandleExceptions {
     @ExceptionHandler(UnregisteredProductException.class)
     public ResponseEntity<StandardException> unregistred(UnregisteredProductException e, HttpServletRequest request){
-        StandardException response = StandardException.badRequest(e.getMessage(), request.getRequestURI());
+        StandardException response = StandardException.notFound(e.getMessage(), request.getRequestURI());
         return ResponseEntity.badRequest().body(response);
     }
 
