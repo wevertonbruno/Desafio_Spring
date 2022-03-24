@@ -23,12 +23,17 @@ public class GetArticlesService {
 
     static {
         productsListRepo.addAll(Arrays.asList(
-                new Product(1L, "Serra de Bancada","Ferramentas", "FORTGPRO", BigDecimal.valueOf(1.800), 5, true, "****"),
+                new Product(1L, "Serra de Bancada","Ferramentas", "FORTGPRO", BigDecimal.valueOf(1800), 5, true, "****"),
                 new Product(2L, "Furadeira","Ferramentas", "Black & Decker", BigDecimal.valueOf(500), 7, true, "****"),
-                new Product(2L, "Soldadora","Ferramentas", "Black & Decker", BigDecimal.valueOf(350.0), 7, true, "***"),
+                new Product(2L, "Soldadora","Ferramentas", "Black & Decker", BigDecimal.valueOf(350), 7, true, "***"),
                 new Product(3L, "Chuteira","Esportes", "Black & Decker", BigDecimal.valueOf(235), 10, true, "*****"),
                 new Product(4L, "Mini Cama elastica","Esportes", "Adidas", BigDecimal.valueOf(183), 6, true, "*****"),
-                new Product(5L, "Camiseta","Esportes", "Starboard", BigDecimal.valueOf(80), 4, true, "***")
+                new Product(5L, "Camiseta","Esportes", "Starboard", BigDecimal.valueOf(80), 4, true, "***"),
+                new Product(7L, "Redmi Note 9","Celulares", "Xiaomi", BigDecimal.valueOf(2800), 15, true, "****"),
+                new Product(8L, "Smartwatch","Celulares", "Noga", BigDecimal.valueOf(1200), 20, false, "**"),
+                new Product(9L, "Camisa","Roupas", "Fila", BigDecimal.valueOf(79), 20, false, "***"),
+                new Product(10L, "Meias","Roupas", "Gonew", BigDecimal.valueOf(10), 8, false, "*"),
+                new Product(11L, "Shorts","Roupas", "Lacoste", BigDecimal.valueOf(275), 9, true, "***")
         ));
     }
 
@@ -71,12 +76,14 @@ public class GetArticlesService {
                             .collect(Collectors.toList());
                     break;
                 case 2:
+                    System.out.println("ordenacao decrescente de preco");
                     productsList = productsList
                             .stream()
                             .sorted((a, b) -> b.getPrice().compareTo(a.getPrice()))
                             .collect(Collectors.toList());
                     break;
                 case 3:
+                    System.out.println("ordenacao crescente de preco");
                     productsList = productsList
                             .stream()
                             .sorted((a, b) -> a.getPrice().compareTo(b.getPrice()))
