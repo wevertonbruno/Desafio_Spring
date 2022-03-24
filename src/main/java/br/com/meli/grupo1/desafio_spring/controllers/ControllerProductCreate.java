@@ -23,6 +23,7 @@ public class ControllerProductCreate {
     @PostMapping("/insert-articles-request")
     public ProductCreateResponseDTO create (@RequestBody CreateRequestDTO articles){
         return serviceProductCreate.create(articles);
+
     }
 
 }
