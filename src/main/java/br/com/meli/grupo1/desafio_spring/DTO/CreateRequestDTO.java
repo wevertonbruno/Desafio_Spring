@@ -16,6 +16,9 @@ public class CreateRequestDTO {
         this.articles = articles;
     }
 
+    public CreateRequestDTO() {
+    }
+
     public CreateRequestDTO(List<Product> articles) {
         this.articles = articles;
     }
