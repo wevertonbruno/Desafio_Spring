@@ -70,6 +70,6 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
 
     @Override
     public List<Product> getAll() {
-        return null;
+        return dados;
     }
 }

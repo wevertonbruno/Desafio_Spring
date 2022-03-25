@@ -1,73 +1,101 @@
 package br.com.meli.grupo1.desafio_spring.services;
 
-import br.com.meli.grupo1.desafio_spring.DTO.ArticleDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.ArticlesDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.repositories.GetAllArticlesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class GetArticlesService {
     @Autowired
-    private GetAllArticlesRepository articles;
+    private GetAllArticlesRepository products;
+//    public Product(Long productId, String name, String category, String brand, Double price, Integer quantity,
+//                   boolean freeShipping, String prestige) {
+
+//    private static List<Product> productsListRepo = new ArrayList<>();
+//
+//    static {
+//        productsListRepo.addAll(Arrays.asList(
+//                new Product(1L, "Serra de Bancada","Ferramentas", "FORTGPRO", BigDecimal.valueOf(1800), 5, true, "****"),
+//                new Product(2L, "Furadeira","Ferramentas", "Black & Decker", BigDecimal.valueOf(500), 7, true, "****"),
+//                new Product(2L, "Soldadora","Ferramentas", "Black & Decker", BigDecimal.valueOf(350), 7, true, "***"),
+//                new Product(3L, "Chuteira","Esportes", "Black & Decker", BigDecimal.valueOf(235), 10, true, "*****"),
+//                new Product(4L, "Mini Cama elastica","Esportes", "Adidas", BigDecimal.valueOf(183), 6, true, "*****"),
+//                new Product(5L, "Camiseta","Esportes", "Starboard", BigDecimal.valueOf(80), 4, true, "***"),
+//                new Product(7L, "Redmi Note 9","Celulares", "Xiaomi", BigDecimal.valueOf(2800), 15, true, "****"),
+//                new Product(8L, "Smartwatch","Celulares", "Noga", BigDecimal.valueOf(1200), 20, false, "**"),
+//                new Product(9L, "Camisa","Roupas", "Fila", BigDecimal.valueOf(79), 20, false, "***"),
+//                new Product(10L, "Meias","Roupas", "Gonew", BigDecimal.valueOf(10), 8, false, "*"),
+//                new Product(11L, "Shorts","Roupas", "Lacoste", BigDecimal.valueOf(275), 9, true, "***")
+//        ));
+//    }
 
     public ArticlesDTO findArticles (String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
-        List<Product> articlesList = articles.getAll();
-        if (category != null && articlesList != null)
-            articlesList = articlesList
+        List<Product> productsList = products.getAll();
+//        List<Product>productsList = new ArrayList<>();
+//        productsList = productsListRepo;
+        if (category != null && productsList != null)
+            productsList = productsList
                     .stream()
-                    .filter(article -> article.getCategory().equals(category))
+                    .filter(article -> article.getCategory().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
-        if (freeShipping != null && articlesList != null)
-            articlesList = articlesList
+        if (freeShipping != null && productsList != null)
+            productsList = productsList
                     .stream()
                     .filter(article -> article.getFreeShipping() && freeShipping)
                     .collect(Collectors.toList());
-        if (productName != null && articlesList != null)
-            articlesList = articlesList
+        if (productName != null && productsList != null)
+            productsList = productsList
                     .stream()
-                    .filter(article -> article.getBrand().equals(productName))
+                    .filter(article -> article.getBrand().equalsIgnoreCase(productName))
                     .collect(Collectors.toList());
-        if (brandName != null && articlesList != null)
-            articlesList = articlesList
+        if (brandName != null && productsList != null)
+            productsList = productsList
                     .stream()
-                    .filter(article -> article.getBrand().equals(brandName))
+                    .filter(article -> article.getBrand().equalsIgnoreCase(brandName))
                     .collect(Collectors.toList());
-        if (typeOrder != null && articlesList != null)
+        if (typeOrder != null && productsList != null)
             switch (typeOrder){
                 case 0:
-                    articlesList = articlesList
+                    productsList = productsList
                             .stream()
                             .sorted((a, b) -> a.getName().compareTo(b.getName()))
                             .collect(Collectors.toList());
                     break;
                 case 1:
-                    articlesList = articlesList
+                    productsList = productsList
                             .stream()
                             .sorted((a, b) -> b.getName().compareTo(a.getName()))
                             .collect(Collectors.toList());
                     break;
                 case 2:
-                    articlesList = articlesList
+                    System.out.println("ordenacao decrescente de preco");
+                    productsList = productsList
                             .stream()
                             .sorted((a, b) -> b.getPrice().compareTo(a.getPrice()))
                             .collect(Collectors.toList());
                     break;
                 case 3:
-                    articlesList = articlesList
+                    System.out.println("ordenacao crescente de preco");
+                    productsList = productsList
                             .stream()
                             .sorted((a, b) -> a.getPrice().compareTo(b.getPrice()))
                             .collect(Collectors.toList());
                     break;
             }
-        ArticlesDTO articlesFinded = new ArticlesDTO(articlesList
-                                         .stream()
-                                         .map(article -> new ArticleDTO(article.getProductId(), article.getName(), article.getQuantity()))
-                                         .collect(Collectors.toList()));
-        return articlesFinded;
+
+        try {
+            return ArticlesDTO.convertToDTO(productsList);
+        } catch (NullPointerException e) {
+            //tratar desta exception
+        }
+        return new ArticlesDTO();
     }
 }
