@@ -16,7 +16,7 @@ public class Product implements Serializable {
     public Product(){}
 
     public Product(Long productId, String name, String category, String brand, Double price, Integer quantity,
-                   boolean freeShipping, String prestige) {
+                   Boolean freeShipping, String prestige) {
         this.productId = productId;
         this.name = name;
         this.category = category;
@@ -75,7 +75,7 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public boolean getFreeShipping() {
+    public Boolean getFreeShipping() {
         return freeShipping;
     }
 
