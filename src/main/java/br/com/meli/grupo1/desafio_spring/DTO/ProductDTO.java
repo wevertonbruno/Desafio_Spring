@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDTO implements Serializable {
+public class ProductDTO {
     private Long productId;
     private String name;
     private Integer quantity;
