@@ -65,7 +65,6 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
 
         /* Criando a compra*/
         Order order = new Order(generatedId, purchases);
-        System.out.println(orders);
         orders.add(order);
 
         /* Salvando a compra em um arquivo JSON */

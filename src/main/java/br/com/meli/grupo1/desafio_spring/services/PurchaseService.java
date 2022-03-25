@@ -38,7 +38,7 @@ public class PurchaseService {
         boolean allProductsExists = purchaseRepository.allProductsExists(productsIdList);
 
         if (!allProductsExists) {
-            throw new UnregisteredProductException("Produto solicitado nao cadastrado ");
+            throw new UnregisteredProductException("Produto solicitado nao cadastrado");
         }
 
         /* Gera uma Order com base nas purchases */
