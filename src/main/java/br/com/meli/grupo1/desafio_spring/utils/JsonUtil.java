@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class Util para tratar leitura e escrita em arquivos Json
+ * @author Weverton Bruno
+ */
 public class JsonUtil {
 
     private static ObjectMapper MAPPER = new ObjectMapper();

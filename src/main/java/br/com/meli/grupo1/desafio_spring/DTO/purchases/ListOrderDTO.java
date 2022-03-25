@@ -2,6 +2,11 @@ package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
 import java.io.Serializable;
 
+/*
+ * DTO para receber a response completo da compra de produto
+ * @author Gabriel Essenio
+ * */
+
 public class ListOrderDTO implements Serializable {
     private OrderDTO ticket;
 

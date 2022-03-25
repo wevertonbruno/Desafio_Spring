@@ -12,6 +12,13 @@ import java.math.BigDecimal;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+
+/*
+ * Entidade de Compra de Produto com atibutos Quantidade e Produto
+ * Criaçao de constructor com anotaçao
+ * @author Weverton Bruno e Gabriel Essenio
+ */
+
 public class Purchase {
     private Integer quantity;
     private Product product;

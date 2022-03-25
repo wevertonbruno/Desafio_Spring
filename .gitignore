@@ -1,3 +1,8 @@
+### @author Weverton Bruno e Jefferson ###
+# o arquivo .gitignore ira ignorar arquivos e pastas que sao gerados automaticamente, seja com configuracoes locais de SO ou IDE ou mesmo da linguagem,
+# e arquivos de pacotes que podem ser baixado automaticamente da maquina do usuario.
+
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

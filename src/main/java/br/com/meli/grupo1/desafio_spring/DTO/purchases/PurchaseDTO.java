@@ -1,5 +1,9 @@
 package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
+/*
+ * DTO para receber um produto da compra
+ * @Author Weverton Bruno
+ * */
 public class PurchaseDTO {
     private Long productId;
     private String name;

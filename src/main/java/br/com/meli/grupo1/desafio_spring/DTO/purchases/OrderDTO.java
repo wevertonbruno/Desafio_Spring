@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * DTO para receber a response ticket de compra de produto
+ * @author Gabriel Essenio
+ * */
+
 public class OrderDTO {
     private Integer id;
     private BigDecimal total;

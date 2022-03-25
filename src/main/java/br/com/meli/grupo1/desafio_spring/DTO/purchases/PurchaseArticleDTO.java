@@ -2,6 +2,11 @@ package br.com.meli.grupo1.desafio_spring.DTO.purchases;
 
 import java.math.BigDecimal;
 
+/*
+ * DTO para receber a response de article da compra de produto
+ * @author Gabriel Essenio
+ * */
+
 public class PurchaseArticleDTO {
     private Long productId;
     private String name;
