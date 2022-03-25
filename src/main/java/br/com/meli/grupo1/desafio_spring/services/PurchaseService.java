@@ -5,6 +5,7 @@ import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
 import br.com.meli.grupo1.desafio_spring.exceptions.EmptyPurchaseException;
+import br.com.meli.grupo1.desafio_spring.exceptions.QuantityIsNotEnough;
 import br.com.meli.grupo1.desafio_spring.exceptions.UnregisteredProductException;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,7 @@ public class PurchaseService {
         /* Validar se todos os produtos existem */
         verifyProducts(productsIdList);
 
+
         /* Gera lista com quantidades para criar purchases */
         Map<Long, Integer> quantidades = request.getArticlesPurchaseRequest().stream().collect(Collectors.toMap(
                 item -> item.getProductId(),
@@ -45,6 +47,12 @@ public class PurchaseService {
 
         /* Pega as informacoes dos produtos do repo */
         List<Product> products = purchaseRepository.getAllProductsIn(productsIdList);
+
+        /* Verifica se existem produtos suficientes*/
+        verifyHasQuantityEnough(products, request.getArticlesPurchaseRequest());
+
+        /* Realiza a atualização das quantidades de produtos em estoque no repositório*/
+        purchaseRepository.updateProductsQuantity(request.getArticlesPurchaseRequest());
 
         /* Gera as purchases */
         List<Purchase> purchases = products.stream().map(p -> new Purchase(quantidades.get(p.getProductId()), p)).collect(Collectors.toList());
@@ -67,6 +75,21 @@ public class PurchaseService {
 
         if (!allProductsExists) {
             throw new UnregisteredProductException("Produto solicitado nao cadastrado");
+        }
+    }
+    /* Verifica se exite a quantidade de produtos suficiente , lança exceçao com mensagem*/
+    private void verifyHasQuantityEnough(List<Product> productsInStock, List<PurchaseDTO> purchaseArticles) {
+        boolean isEnough = true;
+        for (PurchaseDTO purchase : purchaseArticles) {
+            for (Product product : productsInStock) {
+                if (product.getProductId().equals(purchase.getProductId()) && product.getQuantity() < purchase.getQuantity()) {
+                    isEnough = false;
+                    break;
+                };
+            }
+        }
+        if (!isEnough) {
+            throw new QuantityIsNotEnough("Não há quantidade suficiente de produtos para realizar a compra");
         }
     }
 
