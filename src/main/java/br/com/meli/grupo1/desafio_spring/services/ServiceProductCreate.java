@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementaçao da camada service para criaçao das regras de negocios
+ * @author Ederson Rodrigues e Nayara Coca
+ */
+
 @Service
 public class ServiceProductCreate {
     RepoCreateProduct repoCreateProduct;

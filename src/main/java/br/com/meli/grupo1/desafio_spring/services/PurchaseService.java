@@ -13,6 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Implementaçao da camada service para criaçao das regras de negocios
+ * @author Weverton Bruno e Gabriel Essenio
+ */
+
 @Service
 public class PurchaseService {
 
@@ -50,13 +55,13 @@ public class PurchaseService {
         /* Gera retorno para o usuario com DTO */
         return createPresentation(order);
     }
-
+        /*Verifica se lista de articles esta vazia , e lança exceçao com mensagem caso esteja*/
     private void verifyEmptyArticles(List<PurchaseDTO> articles){
         if(articles.size() == 0){
             throw new EmptyPurchaseException("Nao é possível realizar compras sem produtos");
         }
     }
-
+        /* Verifica se o produto esta cadastrado, caso nao estaja , lança exceçao com mensagem*/
     private void verifyProducts(List<Long> productsIdList){
         boolean allProductsExists = purchaseRepository.allProductsExists(productsIdList);
 
@@ -65,6 +70,7 @@ public class PurchaseService {
         }
     }
 
+    /*Mapeia os dados do produto e retorna lista de o article da solicitaçao de compra */
     private ListOrderDTO createPresentation(Order order){
         List<PurchaseArticleDTO> articleDTO = order.getPurchases().stream().map(purchase -> new PurchaseArticleDTO(
                 purchase.getProduct().getProductId(),

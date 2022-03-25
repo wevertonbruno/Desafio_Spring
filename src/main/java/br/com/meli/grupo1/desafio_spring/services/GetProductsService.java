@@ -1,27 +1,36 @@
-package br.com.meli.grupo1.desafio_spring.services;
+    package br.com.meli.grupo1.desafio_spring.services;
 
 import br.com.meli.grupo1.desafio_spring.DTO.ArticlesDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
-import br.com.meli.grupo1.desafio_spring.repositories.GetAllArticlesRepository;
+import br.com.meli.grupo1.desafio_spring.repositories.GetAllProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * @author Rogério e Jefferson
+ * Esta classe é responsável por fazer o tratamento das requisições do busca de produtos
+ */
 @Service
-public class GetArticlesService {
-    @Autowired
-    private GetAllArticlesRepository products;
+public class GetProductsService {
 
-    public ArticlesDTO findArticles (String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
+    /**
+     * @author Rogério e Jefferson
+     * Faz injeção de reponsitório de produtos
+     */
+    @Autowired
+    private GetAllProductsRepository products;
+
+    /**
+     * @author Rogério e Jefferson
+     * Este metodo faz leitura dos produtos existente e aplica sequenacialmente todos os filtros e ordenação enviados
+     * na requisição
+     */
+
+    public ArticlesDTO findProducts(String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
 
         List<Product> productsList = products.getAll();
-//        List<Product>productsList = new ArrayList<>();
-//        productsList = productsListRepo;
 
         if (category != null && productsList != null)
             productsList = productsList
@@ -80,13 +89,11 @@ public class GetArticlesService {
                             .collect(Collectors.toList());
                     break;
             }
-            try {
-                return ArticlesDTO.convertToDTO(productsList);
-            } catch (NullPointerException e) {
-                //tratar desta exception
-            }
 
-        return new ArticlesDTO();
-
+        if (productsList != null) {
+            return ArticlesDTO.convertToDTO(productsList);
+        } else {
+            return new ArticlesDTO();
+        }
     }
 }

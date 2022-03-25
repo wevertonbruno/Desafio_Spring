@@ -1,13 +1,20 @@
 package br.com.meli.grupo1.desafio_spring.DTO;
 
-import br.com.meli.grupo1.desafio_spring.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * Usado para dar resposta apos cadastrar um produto
+ * @author Ederson Rodrigues e Nayara Coca
+ */
 
 import java.util.List;
+
+/**
+ * Usado para responder ao usuario apos criar a lista de produtos
+ * @author Ederson Rodrigues e Nayara Coca
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

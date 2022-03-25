@@ -4,7 +4,10 @@ import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
 
-
+/*
+* Exception padrao personalizada, responsavel por enviar para o usuario uma resposta de erro padronizada.
+* @author Weverton Bruno
+* */
 public class StandardException {
     private Integer status;
     private String msg;
