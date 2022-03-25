@@ -14,7 +14,7 @@ public class JsonUtil {
     private static ObjectMapper MAPPER = new ObjectMapper();
 
     /**
-     * Reads a json file and returns a java object instance of type 'classType'
+     * Ler um arquivo json e retorna uma instancia do tipo classType
      * @param path
      * @param classType
      * @param <T>
@@ -27,7 +27,7 @@ public class JsonUtil {
     }
 
     /**
-     * Reads a json file and returns a List of classType's object
+     * Ler um arquivo json e retorna uma lista de instancias do tipo classType
      * @param path
      * @param classType
      * @param <T>
@@ -39,7 +39,7 @@ public class JsonUtil {
     }
 
     /**
-     * Save the object as a file
+     * Salva um objeto da class T em um arquivo json no diretorio path
      * @param path
      * @param payload
      * @param <T>
