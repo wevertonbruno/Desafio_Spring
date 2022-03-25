@@ -5,12 +5,14 @@ import br.com.meli.grupo1.desafio_spring.DTO.purchases.ListOrderDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.purchases.OrderDTO;
 import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseRequestDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
+import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.exceptions.EmptyPurchaseException;
 import br.com.meli.grupo1.desafio_spring.exceptions.UnregisteredProductException;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,7 +38,7 @@ public class PurchaseService {
         boolean allProductsExists = purchaseRepository.allProductsExists(productsIdList);
 
         if (!allProductsExists) {
-            throw new UnregisteredProductException("Produto solicitado nao cadastrado ");
+            throw new UnregisteredProductException("Produto solicitado nao cadastrado");
         }
 
         /* Gera uma Order com base nas purchases */
