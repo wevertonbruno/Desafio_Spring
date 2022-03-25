@@ -12,5 +12,5 @@ public interface PurchaseRepository {
     boolean existProduct(Long id);
     boolean allProductsExists(List<Long> ids);
     List<Product> getAllProductsIn(List<Long> idList);
-    Order createPurchases(List<PurchaseDTO> purchases);
+    Order createPurchases(List<Purchase> purchases);
 }

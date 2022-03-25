@@ -56,15 +56,14 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     }
 
     @Override
-    public Order createPurchases(List<PurchaseDTO> purchasesDTO) {
-        /* Mapeando DTO para lista de purchases TODO mover esse map para a camada de servico */
-        List<Purchase> purchases = purchasesDTO.stream().map(p -> new Purchase(p.getQuantity(), findById(p.getProductId()))).collect(Collectors.toList());
-
+    public Order createPurchases(List<Purchase> purchases) {
         /* Gerando ID da compra */
         Integer generatedId = gerenatePurchaseId();
 
         /* Criando a compra*/
         Order order = new Order(generatedId, purchases);
+
+        /* Atualiza em memoria */
         orders.add(order);
 
         /* Salvando a compra em um arquivo JSON */
