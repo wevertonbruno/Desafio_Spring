@@ -16,27 +16,12 @@ import java.util.stream.Collectors;
 public class GetArticlesService {
     @Autowired
     private GetAllArticlesRepository products;
-//    public Product(Long productId, String name, String category, String brand, Double price, Integer quantity,
-//                   boolean freeShipping, String prestige) {
-
-    private static List<Product> productsListRepo = new ArrayList<>();
-
-    static {
-        productsListRepo.addAll(Arrays.asList(
-                new Product(1L, "Serra de Bancada","Ferramentas", "FORTGPRO", BigDecimal.valueOf(1.800), 5, true, "****"),
-                new Product(2L, "Furadeira","Ferramentas", "Black & Decker", BigDecimal.valueOf(500), 7, true, "****"),
-                new Product(2L, "Soldadora","Ferramentas", "Black & Decker", BigDecimal.valueOf(350.0), 7, true, "***"),
-                new Product(3L, "Chuteira","Esportes", "Black & Decker", BigDecimal.valueOf(235), 10, true, "*****"),
-                new Product(4L, "Mini Cama elastica","Esportes", "Adidas", BigDecimal.valueOf(183), 6, true, "*****"),
-                new Product(5L, "Camiseta","Esportes", "Starboard", BigDecimal.valueOf(80), 4, true, "***")
-        ));
-    }
 
     public ArticlesDTO findArticles (String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
 
-//        List<Product> productsList = products.getAll();
-        List<Product> productsList = new ArrayList<>();
-        productsList = productsListRepo;
+        List<Product> productsList = products.getAll();
+//        List<Product>productsList = new ArrayList<>();
+//        productsList = productsListRepo;
 
         if (category != null && productsList != null)
             productsList = productsList
@@ -81,12 +66,14 @@ public class GetArticlesService {
                             .collect(Collectors.toList());
                     break;
                 case 2:
+                    System.out.println("ordenacao decrescente de preco");
                     productsList = productsList
                             .stream()
                             .sorted((a, b) -> b.getPrice().compareTo(a.getPrice()))
                             .collect(Collectors.toList());
                     break;
                 case 3:
+                    System.out.println("ordenacao crescente de preco");
                     productsList = productsList
                             .stream()
                             .sorted((a, b) -> a.getPrice().compareTo(b.getPrice()))
@@ -99,10 +86,7 @@ public class GetArticlesService {
                 //tratar desta exception
             }
 
-
-
         return new ArticlesDTO();
-
 
     }
 }
