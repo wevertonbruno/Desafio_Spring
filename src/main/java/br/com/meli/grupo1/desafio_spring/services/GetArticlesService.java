@@ -16,53 +16,43 @@ import java.util.stream.Collectors;
 public class GetArticlesService {
     @Autowired
     private GetAllArticlesRepository products;
-//    public Product(Long productId, String name, String category, String brand, Double price, Integer quantity,
-//                   boolean freeShipping, String prestige) {
-
-//    private static List<Product> productsListRepo = new ArrayList<>();
-//
-//    static {
-//        productsListRepo.addAll(Arrays.asList(
-//                new Product(1L, "Serra de Bancada","Ferramentas", "FORTGPRO", BigDecimal.valueOf(1800), 5, true, "****"),
-//                new Product(2L, "Furadeira","Ferramentas", "Black & Decker", BigDecimal.valueOf(500), 7, true, "****"),
-//                new Product(2L, "Soldadora","Ferramentas", "Black & Decker", BigDecimal.valueOf(350), 7, true, "***"),
-//                new Product(3L, "Chuteira","Esportes", "Black & Decker", BigDecimal.valueOf(235), 10, true, "*****"),
-//                new Product(4L, "Mini Cama elastica","Esportes", "Adidas", BigDecimal.valueOf(183), 6, true, "*****"),
-//                new Product(5L, "Camiseta","Esportes", "Starboard", BigDecimal.valueOf(80), 4, true, "***"),
-//                new Product(7L, "Redmi Note 9","Celulares", "Xiaomi", BigDecimal.valueOf(2800), 15, true, "****"),
-//                new Product(8L, "Smartwatch","Celulares", "Noga", BigDecimal.valueOf(1200), 20, false, "**"),
-//                new Product(9L, "Camisa","Roupas", "Fila", BigDecimal.valueOf(79), 20, false, "***"),
-//                new Product(10L, "Meias","Roupas", "Gonew", BigDecimal.valueOf(10), 8, false, "*"),
-//                new Product(11L, "Shorts","Roupas", "Lacoste", BigDecimal.valueOf(275), 9, true, "***")
-//        ));
-//    }
 
     public ArticlesDTO findArticles (String category, Boolean freeShipping, String productName, String brandName, Integer typeOrder) {
+
         List<Product> productsList = products.getAll();
 //        List<Product>productsList = new ArrayList<>();
 //        productsList = productsListRepo;
+
         if (category != null && productsList != null)
             productsList = productsList
                     .stream()
                     .filter(article -> article.getCategory().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
+
+
         if (freeShipping != null && productsList != null)
             productsList = productsList
                     .stream()
                     .filter(article -> article.getFreeShipping() && freeShipping)
                     .collect(Collectors.toList());
+
+
         if (productName != null && productsList != null)
             productsList = productsList
                     .stream()
-                    .filter(article -> article.getBrand().equalsIgnoreCase(productName))
+                    .filter(article -> article.getName().equalsIgnoreCase(productName))
                     .collect(Collectors.toList());
+
+
         if (brandName != null && productsList != null)
             productsList = productsList
                     .stream()
                     .filter(article -> article.getBrand().equalsIgnoreCase(brandName))
                     .collect(Collectors.toList());
+
+
         if (typeOrder != null && productsList != null)
-            switch (typeOrder){
+            switch (typeOrder) {
                 case 0:
                     productsList = productsList
                             .stream()
@@ -90,12 +80,13 @@ public class GetArticlesService {
                             .collect(Collectors.toList());
                     break;
             }
+            try {
+                return ArticlesDTO.convertToDTO(productsList);
+            } catch (NullPointerException e) {
+                //tratar desta exception
+            }
 
-        try {
-            return ArticlesDTO.convertToDTO(productsList);
-        } catch (NullPointerException e) {
-            //tratar desta exception
-        }
         return new ArticlesDTO();
+
     }
 }
