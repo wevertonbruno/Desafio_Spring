@@ -18,17 +18,17 @@ import java.util.stream.Collectors;
 
 @Repository
 public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllArticlesRepository {
-    List<Product> dados;
-    List<Order> orders = new ArrayList<>();
+    List<Product> products;
+    List<Order> orders;
 
     public JsonProductRepository() throws IOException {
-        dados = JsonUtil.readAsList("file:src/main/resources/data/products.json", Product[].class);
+        products = JsonUtil.readAsList("file:src/main/resources/data/products.json", Product[].class);
         orders = JsonUtil.readAsList("file:src/main/resources/data/orders.json", Order[].class);
     }
 
     @Override
     public boolean existProduct(Long id) {
-        return dados.stream().anyMatch(p -> p.getProductId().equals(id));
+        return products.stream().anyMatch(p -> p.getProductId().equals(id));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     }
 
     private Product findById(Long id){
-        return dados.stream().filter(p -> p.getProductId().equals(id)).findFirst().get();
+        return products.stream().filter(p -> p.getProductId().equals(id)).findFirst().get();
     }
 
     private Integer gerenatePurchaseId(){
@@ -78,10 +78,10 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     }
 
     @Override
-    public List<Product> create(List<Product> products) {
+    public List<Product> create(List<Product> productsList) {
         try {
-            JsonUtil.saveAsFile("file:src/main/resources/data/products.json", products);
-            dados = products;
+            JsonUtil.saveAsFile("file:src/main/resources/data/products.json", productsList);
+            products = productsList;
             return products;
         }catch (IOException e){
             return null;
@@ -90,6 +90,6 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
 
     @Override
     public List<Product> getAll() {
-        return null;
+        return products;
     }
 }

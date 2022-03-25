@@ -34,7 +34,7 @@ public class JsonUtil {
      * @return
      * @throws IOException
      */
-    public static <T> ArrayList<T> readAsList(String path, Class<T[]> classType) throws IOException {
+    public static <T> List<T> readAsList(String path, Class<T[]> classType) throws IOException {
         return new ArrayList<>(Arrays.asList(read(path, classType)));
     }
 
