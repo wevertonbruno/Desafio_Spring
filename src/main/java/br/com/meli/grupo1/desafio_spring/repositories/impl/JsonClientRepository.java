@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class JsonClientRepository implements RepoClient {
@@ -22,9 +23,7 @@ public class JsonClientRepository implements RepoClient {
     @Override
     public Client createClient(Client client) {
         Long id = clients.size() + 1L;
-
         client.setClienteId(id);
-
         clients.add(client);
 
         try {
@@ -39,5 +38,28 @@ public class JsonClientRepository implements RepoClient {
     public Optional<Client> findByEmail(String email) {
         Optional<Client> isHaveEmail = clients.stream().filter(x -> x.getEmail().equals(email)).findFirst();
         return isHaveEmail;
+    }
+
+    @Override
+    public List<Client> findAll() {
+        return clients;
+    }
+
+    @Override
+    public List<Client> search(String estado) {
+        return clients.stream().filter(client -> client.getEstado().equalsIgnoreCase(estado)).collect(Collectors.toList());
+    }
+
+    public void setClients(List<Client> clients){
+        this.clients = clients;
+        persist(clients);
+    }
+
+    private void persist(List<Client> clients){
+        try {
+            JsonUtil.saveAsFile("file:src/main/resources/data/clients.json", clients);
+        }catch (IOException e){
+            System.out.println("Falha ao persistir dados");
+        }
     }
 }
