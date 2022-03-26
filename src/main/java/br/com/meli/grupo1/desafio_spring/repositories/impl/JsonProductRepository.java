@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  */
 
 @Repository
-public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllProductsRepository, RepoClient {
+public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllProductsRepository {
     List<Product> products;
     List<Order> orders;
 
@@ -116,15 +116,5 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     @Override
     public List<Product> getAll() {
         return products;
-    }
-
-    @Override
-    public Client createClient(Client client) {
-        return null;
-    }
-
-    @Override
-    public Optional<Client> findByEmail(String email) {
-        return Optional.empty();
     }
 }
