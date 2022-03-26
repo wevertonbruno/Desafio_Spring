@@ -1,9 +1,6 @@
 package br.com.meli.grupo1.desafio_spring.controllers;
 
-import br.com.meli.grupo1.desafio_spring.exceptions.EmptyPurchaseException;
-import br.com.meli.grupo1.desafio_spring.exceptions.FailToSaveInStorage;
-import br.com.meli.grupo1.desafio_spring.exceptions.UnregisteredProductException;
-import br.com.meli.grupo1.desafio_spring.exceptions.StandardException;
+import br.com.meli.grupo1.desafio_spring.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -49,6 +46,12 @@ public class ControllerHandleExceptions {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardException> argumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request){
         StandardException response = StandardException.badRequest(e.getFieldError().getDefaultMessage(), request.getRequestURI());
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(EmailInUseException.class)
+    public ResponseEntity<StandardException> argumentNotValid(EmailInUseException e, HttpServletRequest request){
+        StandardException response = StandardException.badRequest(e.getMessage(), request.getRequestURI());
         return ResponseEntity.badRequest().body(response);
     }
 }
