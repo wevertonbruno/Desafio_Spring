@@ -4,6 +4,7 @@ import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
 import br.com.meli.grupo1.desafio_spring.exceptions.FailToSaveInStorage;
+import br.com.meli.grupo1.desafio_spring.repositories.CartRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.GetAllProductsRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.RepoCreateProduct;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  */
 
 @Repository
-public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllProductsRepository {
+public class JsonProductRepository implements PurchaseRepository, RepoCreateProduct, GetAllProductsRepository, CartRepository {
     List<Product> products;
     List<Order> orders;
 
@@ -113,5 +114,10 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     @Override
     public List<Product> getAll() {
         return products;
+    }
+
+    @Override
+    public List<Order> getAllOrder() {
+        return orders;
     }
 }
