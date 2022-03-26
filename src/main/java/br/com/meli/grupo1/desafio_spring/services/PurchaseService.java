@@ -38,7 +38,6 @@ public class PurchaseService {
         /* Validar se todos os produtos existem */
         verifyProducts(productsIdList);
 
-
         /* Gera lista com quantidades para criar purchases */
         Map<Long, Integer> quantidades = request.getArticlesPurchaseRequest().stream().collect(Collectors.toMap(
                 item -> item.getProductId(),
@@ -49,7 +48,7 @@ public class PurchaseService {
         List<Product> products = purchaseRepository.getAllProductsIn(productsIdList);
 
         /* Verifica se existem produtos suficientes*/
-        verifyHasQuantityEnough(products, request.getArticlesPurchaseRequest());
+        verifyHasQuantityEnough(products, quantidades);
 
         /* Realiza a atualização das quantidades de produtos em estoque no repositório*/
         purchaseRepository.updateProductsQuantity(request.getArticlesPurchaseRequest());
@@ -78,18 +77,12 @@ public class PurchaseService {
         }
     }
     /* Verifica se exite a quantidade de produtos suficiente , lança exceçao com mensagem*/
-    private void verifyHasQuantityEnough(List<Product> productsInStock, List<PurchaseDTO> purchaseArticles) {
-        boolean isEnough = true;
-        for (PurchaseDTO purchase : purchaseArticles) {
-            for (Product product : productsInStock) {
-                if (product.getProductId().equals(purchase.getProductId()) && product.getQuantity() < purchase.getQuantity()) {
-                    isEnough = false;
-                    break;
-                };
+    private void verifyHasQuantityEnough(List<Product> productsInStock, Map<Long, Integer> quantidades) {
+        /* O Map quantidades mapeia o Id do produto com a quantidade comprada */
+        for (Product product: productsInStock){
+            if(product.getQuantity()< quantidades.get(product.getProductId())){
+                throw new QuantityIsNotEnough("Não há quantidade suficiente de produtos para realizar a compra");
             }
-        }
-        if (!isEnough) {
-            throw new QuantityIsNotEnough("Não há quantidade suficiente de produtos para realizar a compra");
         }
     }
 
