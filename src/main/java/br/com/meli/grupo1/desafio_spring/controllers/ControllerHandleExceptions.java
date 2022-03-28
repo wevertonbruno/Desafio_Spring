@@ -1,9 +1,6 @@
 package br.com.meli.grupo1.desafio_spring.controllers;
 
-import br.com.meli.grupo1.desafio_spring.exceptions.EmptyPurchaseException;
-import br.com.meli.grupo1.desafio_spring.exceptions.FailToSaveInStorage;
-import br.com.meli.grupo1.desafio_spring.exceptions.UnregisteredProductException;
-import br.com.meli.grupo1.desafio_spring.exceptions.StandardException;
+import br.com.meli.grupo1.desafio_spring.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -50,5 +47,11 @@ public class ControllerHandleExceptions {
     public ResponseEntity<StandardException> argumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request){
         StandardException response = StandardException.badRequest(e.getFieldError().getDefaultMessage(), request.getRequestURI());
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(QuantityIsNotEnough.class)
+    public ResponseEntity<StandardException> argumentNotValid(QuantityIsNotEnough e, HttpServletRequest request){
+        StandardException response = StandardException.notAcceptable(e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(406).body(response);
     }
 }

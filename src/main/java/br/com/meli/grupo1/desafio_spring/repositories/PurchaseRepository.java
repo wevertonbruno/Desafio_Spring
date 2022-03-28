@@ -1,5 +1,6 @@
 package br.com.meli.grupo1.desafio_spring.repositories;
 
+import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
@@ -16,4 +17,5 @@ public interface PurchaseRepository {
     boolean allProductsExists(List<Long> ids);
     List<Product> getAllProductsIn(List<Long> idList);
     Order createPurchases(List<Purchase> purchases);
+    void updateProductsQuantity(List<PurchaseDTO> purchaseArticles);
 }
