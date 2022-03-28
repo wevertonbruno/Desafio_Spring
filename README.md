@@ -37,3 +37,18 @@ complexidade maior.
 
 ### Postman
 - [Link com os testes do Postman](https://drive.google.com/file/d/1VyNSWddjCwa8og7E71D__v470K8K1aM6/view?usp=sharing)
+
+### Ferramentas e Tecnologia
+- [SpringBoot](https://spring.io/projects/spring-boot)
+- [Maven](https://maven.apache.org/guides/)
+- [Java](https://docs.oracle.com/en/java/)
+- [HTTP](https://devdocs.io/http/)
+
+
+### Integrantes:
+-[Ederson Araújo](https://github.com/edersonrodara)
+-[Gabriel Sennio](github.com/GabrielEssenio)
+-[Jefferson Botelho](https://github.com/jeffbotelho)
+-[Nayara Coca](https://github.com/Naycoca)
+-[Rogério Lambert](https://github.com/rogerio-lambert)
+-[Weverton Bruno](https://github.com/wevertonbruno)
