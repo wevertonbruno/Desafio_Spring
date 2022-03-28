@@ -19,18 +19,21 @@ complexidade maior.
 
 ### Requisitos
 
-- [ ] R001: Cadastrar uma lista de produtos.
-- [ ] R002: Retornar uma lista de todos os produtos disponíveis.
-- [ ] R003: Retornar uma lista de produtos filtrados por categoria.
-- [ ] R004: Retornar uma lista que permite a combinação de qualquer um dos filtros.
-  - [ ] R005: Alfabético (crescente e decrescente)
-  - [ ] R006: Preço mais alto
-  - [ ] R007: Menor Preço
-- [ ] R008: Possibilidade de envio de pedido de compra.
-- [ ] R009: Para cada solicitação de compra é necessário realizar o controle de estoque
+- [x] R001: Cadastrar uma lista de produtos.
+- [x] R002: Retornar uma lista de todos os produtos disponíveis.
+- [x] R003: Retornar uma lista de produtos filtrados por categoria.
+- [x] R004: Retornar uma lista que permite a combinação de qualquer um dos filtros.
+  - [x] R005: Alfabético (crescente e decrescente)
+  - [x] R006: Preço mais alto
+  - [x] R007: Menor Preço
+- [x] R008: Possibilidade de envio de pedido de compra.
+- [x] R009: Para cada solicitação de compra é necessário realizar o controle de estoque
   disponível.
-- [ ] R010: Permite a utilização de um “carrinho de compras” onde para cada pedido de
+- [x] R010: Permite a utilização de um “carrinho de compras” onde para cada pedido de
   compra existe um valor total acumulado e devolvido ao utilizador.
-- [ ] R011: Cadastre novos clientes.
-- [ ] R012: Obter uma lista completa de todos os clientes.
-- [ ] R013: Obter uma lista de todos os clientes filtrados por Estado.
+- [x] R011: Cadastre novos clientes.
+- [x] R012: Obter uma lista completa de todos os clientes.
+- [x] R013: Obter uma lista de todos os clientes filtrados por Estado.
+
+### Postaman
+- [Link com os testes do Postman](https://drive.google.com/file/d/1VyNSWddjCwa8og7E71D__v470K8K1aM6/view?usp=sharing)
