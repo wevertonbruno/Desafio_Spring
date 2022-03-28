@@ -3,6 +3,7 @@ package br.com.meli.grupo1.desafio_spring;
 import br.com.meli.grupo1.desafio_spring.entities.Client;
 import br.com.meli.grupo1.desafio_spring.repositories.RepoClient;
 import br.com.meli.grupo1.desafio_spring.repositories.impl.JsonClientRepository;
+import br.com.meli.grupo1.desafio_spring.repositories.impl.JsonProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,9 @@ import java.util.List;
 public class DesafioSpringApplication implements CommandLineRunner {
 	@Autowired
 	JsonClientRepository repoClient;
+
+	@Autowired
+	JsonProductRepository productRepository;
 
 
 	public static void main(String[] args) {
@@ -34,5 +38,9 @@ public class DesafioSpringApplication implements CommandLineRunner {
 		));
 
 		repoClient.setClients(clients);
+
+		/* Limpa dados de produtos e orders */
+		productRepository.setProducts(new ArrayList<>());
+		productRepository.setOrders(new ArrayList<>());
 	}
 }
