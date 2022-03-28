@@ -65,6 +65,10 @@ public class StandardException {
         return new StandardException(HttpStatus.SERVICE_UNAVAILABLE.value(), msg, Instant.now(), path);
     }
 
+    public  static StandardException notAcceptable(String msg, String path){
+        return new StandardException(HttpStatus.NOT_ACCEPTABLE.value(), msg, Instant.now(), path);
+    }
+
     @Override
     public String toString() {
         return "StandardException{" +

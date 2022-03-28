@@ -1,5 +1,7 @@
 package br.com.meli.grupo1.desafio_spring.repositories.impl;
 
+import br.com.meli.grupo1.desafio_spring.entities.Client;
+import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
@@ -136,6 +138,18 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
             JsonUtil.saveAsFile("file:src/main/resources/data/products.json", products);
         }catch (IOException e){
             System.out.println("Falha ao persistir dados de produtos");
+        }
+    }
+    /*
+     * Atualiza a quantidade de produtos em estoque, após validação da quantidade
+     * */
+    @Override
+    public void updateProductsQuantity(List<PurchaseDTO> purchaseArticles) {
+        for (PurchaseDTO purchase : purchaseArticles) {
+            for(Product product : products) {
+                if (purchase.getProductId().equals(product.getProductId()))
+                    product.setQuantity(product.getQuantity() - purchase.getQuantity());
+            }
         }
     }
 }
