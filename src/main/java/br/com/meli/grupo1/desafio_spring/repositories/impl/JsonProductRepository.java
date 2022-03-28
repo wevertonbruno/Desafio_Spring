@@ -1,6 +1,7 @@
 package br.com.meli.grupo1.desafio_spring.repositories.impl;
 
 import br.com.meli.grupo1.desafio_spring.entities.Client;
+import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
 import br.com.meli.grupo1.desafio_spring.entities.Purchase;
@@ -116,5 +117,18 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
     @Override
     public List<Product> getAll() {
         return products;
+    }
+
+    /*
+     * Atualiza a quantidade de produtos em estoque, após validação da quantidade
+     * */
+    @Override
+    public void updateProductsQuantity(List<PurchaseDTO> purchaseArticles) {
+        for (PurchaseDTO purchase : purchaseArticles) {
+            for(Product product : products) {
+                if (purchase.getProductId().equals(product.getProductId()))
+                    product.setQuantity(product.getQuantity() - purchase.getQuantity());
+            }
+        }
     }
 }
