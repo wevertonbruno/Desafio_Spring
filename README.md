@@ -35,5 +35,5 @@ complexidade maior.
 - [x] R012: Obter uma lista completa de todos os clientes.
 - [x] R013: Obter uma lista de todos os clientes filtrados por Estado.
 
-### Postaman
+### Postman
 - [Link com os testes do Postman](https://drive.google.com/file/d/1VyNSWddjCwa8og7E71D__v470K8K1aM6/view?usp=sharing)
