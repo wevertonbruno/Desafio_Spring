@@ -46,9 +46,9 @@ complexidade maior.
 
 
 ### Integrantes:
--[Ederson Araújo](https://github.com/edersonrodara)
--[Gabriel Sennio](github.com/GabrielEssenio)
--[Jefferson Botelho](https://github.com/jeffbotelho)
--[Nayara Coca](https://github.com/Naycoca)
--[Rogério Lambert](https://github.com/rogerio-lambert)
--[Weverton Bruno](https://github.com/wevertonbruno)
+- [Ederson Araújo](https://github.com/edersonrodara)
+- [Gabriel Sennio](github.com/GabrielEssenio)
+- [Jefferson Botelho](https://github.com/jeffbotelho)
+- [Nayara Coca](https://github.com/Naycoca)
+- [Rogério Lambert](https://github.com/rogerio-lambert)
+- [Weverton Bruno](https://github.com/wevertonbruno)
