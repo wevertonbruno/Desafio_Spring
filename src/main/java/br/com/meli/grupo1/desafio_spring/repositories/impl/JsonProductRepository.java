@@ -1,5 +1,6 @@
 package br.com.meli.grupo1.desafio_spring.repositories.impl;
 
+import br.com.meli.grupo1.desafio_spring.entities.Client;
 import br.com.meli.grupo1.desafio_spring.DTO.purchases.PurchaseDTO;
 import br.com.meli.grupo1.desafio_spring.entities.Order;
 import br.com.meli.grupo1.desafio_spring.entities.Product;
@@ -7,12 +8,14 @@ import br.com.meli.grupo1.desafio_spring.entities.Purchase;
 import br.com.meli.grupo1.desafio_spring.exceptions.FailToSaveInStorage;
 import br.com.meli.grupo1.desafio_spring.repositories.GetAllProductsRepository;
 import br.com.meli.grupo1.desafio_spring.repositories.PurchaseRepository;
+import br.com.meli.grupo1.desafio_spring.repositories.RepoClient;
 import br.com.meli.grupo1.desafio_spring.repositories.RepoCreateProduct;
 import br.com.meli.grupo1.desafio_spring.utils.JsonUtil;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**

@@ -49,6 +49,12 @@ public class ControllerHandleExceptions {
         return ResponseEntity.badRequest().body(response);
     }
 
+    @ExceptionHandler(EmailInUseException.class)
+    public ResponseEntity<StandardException> argumentNotValid(EmailInUseException e, HttpServletRequest request){
+        StandardException response = StandardException.badRequest(e.getMessage(), request.getRequestURI());
+        return ResponseEntity.badRequest().body(response); 
+    }
+
     @ExceptionHandler(QuantityIsNotEnough.class)
     public ResponseEntity<StandardException> argumentNotValid(QuantityIsNotEnough e, HttpServletRequest request){
         StandardException response = StandardException.notAcceptable(e.getMessage(), request.getRequestURI());
