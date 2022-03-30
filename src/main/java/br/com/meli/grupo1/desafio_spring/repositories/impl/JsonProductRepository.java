@@ -32,6 +32,9 @@ public class JsonProductRepository implements PurchaseRepository, RepoCreateProd
         orders = JsonUtil.readAsList("file:src/main/resources/data/orders.json", Order[].class);
     }
 
+    /*
+    * Verifica se determinado produto existe
+    * */
     @Override
     public boolean existProduct(Long id) {
         return products.stream().anyMatch(p -> p.getProductId().equals(id));

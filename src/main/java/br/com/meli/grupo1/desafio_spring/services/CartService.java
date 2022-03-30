@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+/*
+* Classe de servico para gerar o total de compras no cart
+* @author Weverton Bruno
+* */
 @Service
 public class CartService {
     private CartRepository cartRepository;
@@ -15,6 +20,9 @@ public class CartService {
         this.cartRepository = cartRepository;
     }
 
+    /*
+    * Pega do repositorio todas as compras do usuario e retorna o total como cart
+    * */
     public CartResponseDTO cart(){
         List<Order> allOrders = cartRepository.getAllOrder();
         return new CartResponseDTO(allOrders);

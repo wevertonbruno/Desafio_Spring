@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/*
+* Repositorio para salvar dados do Cliente
+* @author Ederson e Weverton
+* */
 @Repository
 public class JsonClientRepository implements RepoClient {
 
@@ -20,6 +24,9 @@ public class JsonClientRepository implements RepoClient {
         clients = JsonUtil.readAsList("file:src/main/resources/data/clients.json", Client[].class);
     }
 
+    /*
+    * Cria um cliente setando o ID e salvando no banco
+    * */
     @Override
     public Client createClient(Client client) {
         Long id = clients.size() + 1L;
@@ -34,27 +41,42 @@ public class JsonClientRepository implements RepoClient {
         }
     }
 
+    /*
+    * Busca um cliente com base no email
+    * */
     @Override
     public Optional<Client> findByEmail(String email) {
         Optional<Client> isHaveEmail = clients.stream().filter(x -> x.getEmail().equals(email)).findFirst();
         return isHaveEmail;
     }
 
+    /*
+    * Retorna a lista de clientes
+    * */
     @Override
     public List<Client> findAll() {
         return clients;
     }
 
+    /*
+    * Filtra clientes por Estado
+    * */
     @Override
     public List<Client> search(String estado) {
         return clients.stream().filter(client -> client.getEstado().equalsIgnoreCase(estado)).collect(Collectors.toList());
     }
 
+    /*
+    * Seta uma lista inicial com dados fakes
+    * */
     public void setClients(List<Client> clients){
         this.clients = clients;
         persist(clients);
     }
 
+    /*
+    * Persiste os dados no arquivo
+    * */
     private void persist(List<Client> clients){
         try {
             JsonUtil.saveAsFile("file:src/main/resources/data/clients.json", clients);

@@ -21,6 +21,9 @@ public class ServiceClient {
     @Autowired
     private RepoClient repoClient;
 
+    /*
+    * Metodo que realiza a criacao de um Cliente e utiliza o repositorio para fazer a persistencia
+    * */
     public ClientResponseDTO createClient(ClientDTO clientDTO) {
         Optional<Client> clientByEmail = repoClient.findByEmail(clientDTO.getEmail());
 
@@ -37,6 +40,9 @@ public class ServiceClient {
         return clientResponseDTO;
     }
 
+    /*
+    * Lista todos os clientes salvos
+    * */
     public List<ClientResponseDTO> findAll(){
         return repoClient.findAll().stream().map(client -> new ClientResponseDTO(
             client.getClienteId(),
@@ -45,6 +51,9 @@ public class ServiceClient {
         )).collect(Collectors.toList());
     }
 
+    /*
+    * LIsta todos os clientes filtrando por Estado
+    * */
     public List<ClientResponseDTO> search(String estado) {
         return repoClient.search(estado)
                 .stream().map(client -> new ClientResponseDTO(
