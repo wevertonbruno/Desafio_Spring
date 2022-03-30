@@ -23,6 +23,9 @@ public class ServiceProductCreate {
         this.repoCreateProduct = repoCreateProduct;
     }
 
+    /*
+    * Salva uma lista de produtos e retorna o DTO de negocio
+    * */
     public ProductCreateResponseDTO create(CreateRequestDTO products){
         List<Product> createdProducts = repoCreateProduct.create(products.getArticles());
         List<ProductDTO> productDTOS = createdProducts
